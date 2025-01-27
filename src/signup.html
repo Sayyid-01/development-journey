@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hi you are in About Page</h1>
+    <form action="" id="form">
+        <input type="text" placeholder="Enter Name" id="name">
+        <input type="text" placeholder="Enter your email" id="email">
+        <input type="text" placeholder="Enter password" id="password">
+        <input type="submit" value="Submit">
+    </form>
+   
+</body>
+</html>
+<script>
+    const form = document.getElementById("form");
+    
+    let name = document.getElementById("name");
+    name.oninput = (e) => {
+        name.value = e.target.value;
+    }
+    let email = document.getElementById("email");
+    email.oninput = (e) => {
+        email.value = e.target.value;
+    }
+    let password = document.getElementById("password");
+    password.oninput = (e) => {
+        password.value = e.target.value;
+    }
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        console.log(typeof name);
+
+        localStorage.setItem(email.value, password.value);
+        window.location.href = "login.html";
+    });
+</script>

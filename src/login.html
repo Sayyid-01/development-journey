@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>You are in login page</h1>
+    <form action="" id="form">
+        <input type="text" placeholder="Enter your email" id="email">
+        <input type="text" placeholder="Enter password" id="password">
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
+<script>
+    const form = document.getElementById("form");
+    let email = document.getElementById("email");
+    let password = document.getElementById("password");
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let userEmail = email.value;
+        let userPassword = password.value;
+        
+        const userCred =  localStorage.getItem(userEmail);
+        console.log("user credentials", userCred);
+        if (!userCred) {
+            alert("User does not exist");
+        }
+        else if (userCred === userPassword) {
+            alert("login sucessful!");
+            window.location.href = "home.html";
+        }
+        else {
+            alert("wrong password! please enter a correct password")
+        }
+
+        // localStorage.setItem(email.value, password.value);
+        // window.location.href = "home.html";
+    })
+</script>
