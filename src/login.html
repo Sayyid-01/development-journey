@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>You are in login page</h1>
-    <form action="" id="form">
+    <form action="" id="login-form">
         <input type="text" placeholder="Enter your email" id="email">
         <input type="text" placeholder="Enter password" id="password">
         <input type="submit" value="Submit">
@@ -15,26 +15,37 @@
 </body>
 </html>
 <script>
-    const form = document.getElementById("form");
+    const form = document.getElementById("login-form");
+    const users = JSON.parse(localStorage.getItem("users"));
+    console.log("users", users);
     let email = document.getElementById("email");
     let password = document.getElementById("password");
     form.addEventListener("submit", (e) => {
         e.preventDefault();
         let userEmail = email.value;
         let userPassword = password.value;
+        console.log(userEmail, userPassword)
         
-        const userCred =  localStorage.getItem(userEmail);
-        console.log("user credentials", userCred);
-        if (!userCred) {
+        let loggedInUser = users.filter((user) => user.email === userEmail && user.password === userPassword)
+        // {name: "abc", email: "abc@gmail.com", password: "abc"}
+        console.log(loggedInUser);
+        // console.log("user credentials", userCred);
+        if (loggedInUser.length == 0) {
             alert("User does not exist");
         }
-        else if (userCred === userPassword) {
-            alert("login sucessful!");
-            window.location.href = "home.html";
-        }
         else {
-            alert("wrong password! please enter a correct password")
+            let currentUser = loggedInUser[0];
+            localStorage.setItem("current-user", JSON.stringify(currentUser));
+            window.location.href = "user-todos.html";
         }
+        // else if (userCred === userPassword) {
+        //     alert("login sucessful!");
+        //     window.location.href = "home.html";
+        // }
+        // else {
+        //     alert("wrong password! please enter a correct password")
+        // }
+
 
         // localStorage.setItem(email.value, password.value);
         // window.location.href = "home.html";

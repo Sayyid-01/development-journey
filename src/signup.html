@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Hi you are in About Page</h1>
-    <form action="" id="form">
+    <form action="" id="signup-form">
         <input type="text" placeholder="Enter Name" id="name">
         <input type="text" placeholder="Enter your email" id="email">
         <input type="text" placeholder="Enter password" id="password">
@@ -17,25 +17,24 @@
 </body>
 </html>
 <script>
-    const form = document.getElementById("form");
+    const form = document.getElementById("signup-form");
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    
     
     let name = document.getElementById("name");
-    name.oninput = (e) => {
-        name.value = e.target.value;
-    }
     let email = document.getElementById("email");
-    email.oninput = (e) => {
-        email.value = e.target.value;
-    }
     let password = document.getElementById("password");
-    password.oninput = (e) => {
-        password.value = e.target.value;
-    }
     form.addEventListener("submit", (e) => {
         e.preventDefault();
         console.log(typeof name);
+        let userCredentials = {
+            name: name.value,
+            email: email.value,
+            password: password.value
+        }
+        users.push(userCredentials);
 
-        localStorage.setItem(email.value, password.value);
+        localStorage.setItem("users", JSON.stringify(users));
         window.location.href = "login.html";
     });
 </script>

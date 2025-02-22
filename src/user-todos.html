@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hi You are Todos page </h1>
+    <input type="text" placeholder="add your task" id="write-task">
+    <input type="submit" placeholder="save" id="save-task"/>
+    <div id="user-todos">
+
+    </div>
+</body>
+</html>
+<script>
+    const currentUser = JSON.parse(localStorage.getItem("current-user"));
+    console.log("current user", currentUser);
+
+    const allTodos = JSON.parse(localStorage.getItem("todos")) || [];
+    const inputTask = document.querySelector("#write-task");
+    const saveBtn = document.querySelector("#save-task");
+
+    let userTodosDiv = document.querySelector("#user-todos");
+    showTodos();
+
+    saveBtn.addEventListener("click", (e) => {
+        inputTodo = {
+            email: currentUser.email,
+            task: inputTask.value,
+            completed: false
+        }
+        allTodos.push(inputTodo);
+        localStorage.setItem("todos", JSON.stringify(allTodos));
+    })
+
+    function showTodos() {
+        
+        let currentUserTodos = allTodos.filter((todo) => todo.email === currentUser.email);
+        console.log("tos", currentUserTodos);
+
+        for (let i = 0; i < currentUserTodos.length; i++) {
+            let todoDiv = document.createElement("div");
+            let task = currentUserTodos[i].task;
+            todoDiv.innerHTML = task;
+            userTodosDiv.append(todoDiv);
+        }
+    }
+</script>
+
+<!-- map, reduce, filter, forEach -->
+ <!-- difference between append and appendChild -->
